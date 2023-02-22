@@ -46,17 +46,25 @@ string[] NeedElem(string[] arr)
       res++;
     }
   }
-  string[] existArr = new string[res];
-  res = 0;
-  for (int i = 0; i < arr.Length; i++)
+  if (res == 0)
   {
-    if (TestLength(arr[i]))
-    {
-      existArr[res] = arr[i];
-      res++;
-    }
+    string[] existArr = Enumerable.Empty<string>().ToArray();
+    return existArr;
   }
-  return existArr;
+  else
+  {
+    string[] existArr = new string[res];
+    res = 0;
+    for (int i = 0; i < arr.Length; i++)
+    {
+      if (TestLength(arr[i]))
+      {
+        existArr[res] = arr[i];
+        res++;
+      }
+    }
+    return existArr;
+  }
 }
 
 
@@ -64,5 +72,12 @@ string[] array = ReadArray("Введите элементы массива (че
 Console.Write("Введён массив из следующих элементов: ");
 PrintArray(array);
 string[] result = NeedElem(array);
-Console.Write("Получившийся массив из элементов до 3-х символов включительно: ");
-PrintArray(result);
+if (result.Length == 0)
+{
+  Console.Write("Получившийся массив из элементов до 3-х символов включительно пуст: []");
+}
+else
+{
+  Console.Write("Получившийся массив из элементов до 3-х символов включительно: ");
+  PrintArray(result);
+}
